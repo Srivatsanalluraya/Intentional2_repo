@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "source": "Semgrep",
+    "severity": "LOW",
+    "file": "vulnerable.js",
+    "line": 4,
+    "issue": "A CSRF middleware was not detected in your express application. Ensure you are either using one such as `csurf` or `csrf` (see rule references) and/or you are properly doing CSRF validation in your routes with a token or cookies.",
+    "impact": "[LOW] A CSRF vulnerability exists due to missing protection, allowing potential attacks via malicious cross-site requests.",
+    "fix": "Add `expressCSRF` or `csurf` middleware to your Express application."
+  },
+  {
+    "id": 2,
+    "source": "Semgrep",
+    "severity": "HIGH",
+    "file": "vulnerable.js",
+    "line": 14,
+    "issue": "Detected calls to child_process from a function argument `req`. This could lead to a command injection if the input is user controllable. Try to avoid calls to child_process, and if it is needed ensure user input is correctly sanitized or sandboxed. ",
+    "impact": "[HIGH] Potential command injection vulnerability due to unvalidated user input in `req` function argument.",
+    "fix": "Replace `child_process` with a safer alternative, such as `child_process.execFile` with a whitelisted list of allowed commands."
+  },
+  {
+    "id": 3,
+    "source": "Semgrep",
+    "severity": "MEDIUM",
+    "file": "vulnerable.js",
+    "line": 27,
+    "issue": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML.",
+    "impact": "[MEDIUM] Directly writing to a Response object from user-defined input may expose the application to a Cross-Site-scripting (XSS) vulnerability.",
+    "fix": "Use `res.render()` or `res.json()` with a template engine or a secure data object."
+  },
+  {
+    "id": 4,
+    "source": "Semgrep",
+    "severity": "MEDIUM",
+    "file": "vulnerable.js",
+    "line": 33,
+    "issue": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML.",
+    "impact": "[MEDIUM] Bypasses HTML escaping, potentially leading to Cross-Site-scripting (XSS) vulnerability.",
+    "fix": "Use `res.render()` or `res.json()` with templating or JSON data to prevent XSS."
+  },
+  {
+    "id": 5,
+    "source": "Semgrep",
+    "severity": "MEDIUM",
+    "file": "vulnerable.js",
+    "line": 38,
+    "issue": "User data flows into the host portion of this manually-constructed HTML. This can introduce a Cross-Site-Scripting (XSS) vulnerability if this comes from user-provided input. Consider using a sanitization library such as DOMPurify to sanitize the HTML within.",
+    "impact": "[MEDIUM] User data injection into HTML can lead to Cross-Site-Scripting (XSS) vulnerability.",
+    "fix": "Use a templating engine or a library that escapes user input, such as Jinja2 or Django's built-in templating."
+  },
+  {
+    "id": 6,
+    "source": "Semgrep",
+    "severity": "MEDIUM",
+    "file": "vulnerable.js",
+    "line": 38,
+    "issue": "Detected directly writing to a Response object from user-defined input. This bypasses any HTML escaping and may expose your application to a Cross-Site-scripting (XSS) vulnerability. Instead, use 'resp.render()' to render safely escaped HTML.",
+    "impact": "[MEDIUM] Direct writing to Response object from user input may expose the app to XSS attacks.",
+    "fix": "Use `res.render()` or `res.json()` instead of directly writing to `res`."
+  },
+  {
+    "id": 7,
+    "source": "Semgrep",
+    "severity": "MEDIUM",
+    "file": "vulnerable.js",
+    "line": 43,
+    "issue": "Detected the use of eval(). eval() can be dangerous if used to evaluate dynamic content. If this content can be input from outside the program, this may be a code injection vulnerability. Ensure evaluated content is not definable by external sources.",
+    "impact": "[MEDIUM] Potential code injection vulnerability if eval() evaluates user-input content.",
+    "fix": "Replace `eval()` with a safer alternative like `ast.literal_eval()` or `json.loads()` if the input is JSON."
+  },
+  {
+    "id": 8,
+    "source": "Semgrep",
+    "severity": "HIGH",
+    "file": "vulnerable.js",
+    "line": 43,
+    "issue": "Found data from an Express or Next web request flowing to `eval`. If this data is user-controllable this can lead to execution of arbitrary system commands in the context of your application process. Avoid `eval` whenever possible.",
+    "impact": "[HIGH] Arbitrary system command execution via user-controllable data.",
+    "fix": "Replace `eval()` with a safer alternative like `Function()` or use a templating engine like EJS for dynamic rendering."
+  },
+  {
+    "id": 9,
+    "source": "pip-audit",
+    "severity": "HIGH",
+    "file": "requirements.txt",
+    "line": 0,
+    "issue": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706. Note that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706. Note that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706 and therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706 then pip doesn't use the \"vulnerable\" fallback code. Mitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12), applying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+    "impact": "[HIGH] Potential directory traversal vulnerability when extracting tar archives due to missing symbolic link checks.",
+    "fix": "Upgrade pip to a version that implements PEP 706."
+  },
+  {
+    "id": 10,
+    "source": "pip-audit",
+    "severity": "HIGH",
+    "file": "requirements.txt",
+    "line": 0,
+    "issue": "When pip is installing and extracting a maliciously crafted wheel archive, files may be extracted outside the installation directory. The path traversal is limited to prefixes of the installation directory, thus isn't able to inject or overwrite executable files in typical situations.",
+    "impact": "[HIGH] Malicious wheel archives can extract files outside the installation directory, allowing potential privilege escalation or data tampering.",
+    "fix": "Fix: Validate the path prefix to prevent path traversal attacks."
+  },
+  {
+    "id": 11,
+    "source": "pip-audit",
+    "severity": "HIGH",
+    "file": "requirements.txt",
+    "line": 0,
+    "issue": "A denial-of-service (DoS) vulnerability exists in google.protobuf.json_format.ParseDict() in Python, where the max_recursion_depth limit can be bypassed when parsing nested google.protobuf.Any messages.  Due to missing recursion depth accounting inside the internal Any-handling logic, an attacker can supply deeply nested Any structures that bypass the intended recursion limit, eventually exhausting Python\u2019s recursion stack and causing a RecursionError.",
+    "impact": "[HIGH] A high-severity DoS vulnerability exists in google.protobuf.json_format.ParseDict() due to bypassing max_recursion_depth limits.",
+    "fix": "**Fix:** Set `max_recursion_depth` to 0 when parsing JSON to prevent recursion: `json_format.ParseDict(input_dict, message, 0)`"
+  }
+]
