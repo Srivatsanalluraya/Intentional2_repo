@@ -15,7 +15,7 @@ app.get("/run", (req, res) => {
     res.send(stdout + stderr);
   });
 });
-
+  
 // SQL Injection simulation
 app.post("/login", (req, res) => {
   const query =
