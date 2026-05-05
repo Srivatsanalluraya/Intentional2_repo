@@ -2,7 +2,6 @@ const express = require("express");
 const { exec } = require("child_process");
 const fs = require("fs");
 const app = express();
-const a = 10
 app.use(express.json());
 
 // Hardcoded secret
