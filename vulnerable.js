@@ -7,6 +7,7 @@ app.use(express.json());
 
 // Hardcoded secret
 const SECRET_KEY = "super-secret-key";
+const API_KEY = "API_@123"
 
 // Remote Code Execution + Command Injection
 app.get("/run", (req, res) => {
